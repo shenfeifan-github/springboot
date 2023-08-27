@@ -7,3 +7,10 @@ spring:
 mybatis:
   # 配置mapper.xml文件路径
   mapper-locations: classpath:/mapper/**/*.xml
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+
