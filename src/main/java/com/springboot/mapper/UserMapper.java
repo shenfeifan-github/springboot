@@ -1,12 +1,13 @@
 package com.springboot.mapper;
-
-import com.github.pagehelper.PageInfo;
-import com.springboot.pojo.User;
+import com.springboot.pojo.Dto.UserDto;
+import com.springboot.pojo.VO.UserVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    List<User> getUser();
+    List<UserDto> getUser(@Param("vo") UserVo vo);
+    void saveUser(UserVo vo);
 }
