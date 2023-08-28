@@ -9,15 +9,16 @@ import com.springboot.pojo.domain.JsonData;
 import com.springboot.service.GradeService;
 import com.springboot.service.UserService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -25,7 +26,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private GradeService gradeService;
-
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     @ApiOperation(value = "获取用户")
     @PostMapping("/getUser")
     public JsonData getUser(@RequestBody UserVo vo){
@@ -64,5 +66,14 @@ public class UserController {
         }catch (Exception e){
             return JsonData.success("删除失败!"+e);
         }
+    }
+
+
+    @ApiOperation(value = "mq发消息")
+    @PostMapping("/mqUser")
+    public JsonData mqUser(){
+        String message="hello shenfeifan";
+         rabbitTemplate.convertAndSend("SFF_EXCHANGE","product.add",message);
+        return JsonData.success("发送成功！");
     }
 }
