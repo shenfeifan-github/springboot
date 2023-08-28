@@ -3,11 +3,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springboot.pojo.Dto.UserDto;
 import com.springboot.pojo.Grade;
+import com.springboot.pojo.User;
 import com.springboot.pojo.VO.UserVo;
 import com.springboot.pojo.domain.JsonData;
 import com.springboot.service.GradeService;
 import com.springboot.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private GradeService gradeService;
+
+    @ApiOperation(value = "获取用户")
     @PostMapping("/getUser")
     public JsonData getUser(@RequestBody UserVo vo){
         PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
@@ -35,13 +40,29 @@ public class UserController {
         PageInfo<UserDto> pageInfo = new PageInfo<>(result);
        return JsonData.success(pageInfo,"查询成功!");
     }
+
+
+    @ApiOperation(value = "添加用户")
     @PostMapping("/saveUser")
-    public JsonData saveUser(@RequestBody UserVo vo){
+    public JsonData saveUser(@RequestBody User vo){
+        if (vo.getNumber().toString().length()!=6){
+            return JsonData.fail("学号必须为六位数!");
+        }
         try {
-            userService.saveUser(vo);
-            return JsonData.success("新增成功!");
+          return  userService.saveUser(vo);
         }catch (Exception e){
             return JsonData.success("新增失败!"+e);
+        }
+    }
+
+    @ApiOperation(value = "批量删除用户")
+    @PostMapping("/removeUser")
+    public JsonData removeUser(Integer[] ids){
+        try {
+            userService.removeUser(ids);
+            return JsonData.success("删除成功!");
+        }catch (Exception e){
+            return JsonData.success("删除失败!"+e);
         }
     }
 }

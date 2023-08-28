@@ -11,4 +11,7 @@
                g.create_time AS createTime
         from grade g where codeshare=#{classNumber}
     </select>
+    <select id="getCodeShare" resultType="java.lang.Integer">
+        select codeshare from grade where status =0;
+    </select>
 </mapper>

@@ -10,7 +10,7 @@ import java.sql.Date;
 public class UserDto {
     private Integer id;
     private String name;
-    private String number;
+    private Integer number;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     private Integer classNumber;

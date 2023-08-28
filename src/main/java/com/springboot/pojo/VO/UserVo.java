@@ -7,6 +7,6 @@ public class UserVo {
     private Integer PageSize=10;
     private Integer PageNum=1;
     private String name;
-    private String number;
-    private String classNumber;
+    private Integer number;
+    private Integer classNumber;
 }
