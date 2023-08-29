@@ -1,5 +1,7 @@
 package com.springboot.controller;
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.read.listener.PageReadListener;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springboot.pojo.Dto.UserDto;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Slf4j
@@ -87,6 +90,29 @@ public class UserController {
             return JsonData.success("导出成功");
         }catch (Exception e){
             return JsonData.fail("导出失败"+e);
+        }
+
+    }
+
+    @ApiOperation(value = "导入学生列表")
+    @PostMapping("/write")
+    public JsonData write() throws IOException{
+        try {
+            String fileName = "学生列表20230830011257.xlsx";
+            // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+            // 这里默认每次会读取100条数据 然后返回过来 直接调用使用数据就行
+            // 具体需要返回多少行可以在`PageReadListener`的构造函数设置
+            List<UserExecl> list =new ArrayList<>();
+            EasyExcel.read(fileName, UserExecl.class, new PageReadListener<UserExecl>(dataList -> {
+                for (UserExecl demoData : dataList) {
+                    log.info("读取到一条数据{}", JSON.toJSONString(demoData));
+                    list.add(demoData);
+                }
+            })).sheet().doRead();
+            log.info("写入的数据{}",list);
+            return userService.insertUserList(list);
+        }catch (Exception e){
+            return JsonData.fail("导入失败"+e);
         }
 
     }

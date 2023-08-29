@@ -1,5 +1,4 @@
 package com.springboot.mapper;
-import com.alibaba.excel.EasyExcel;
 import com.springboot.pojo.Dto.UserDto;
 import com.springboot.pojo.EasyExcel.UserExecl;
 import com.springboot.pojo.User;
@@ -18,4 +17,5 @@ public interface UserMapper {
     List<UserExecl> getUserExcel();
     void updateUserStatus(@Param("id") Integer id);
     List<Integer> getUserId();
+    void insertUserList(@Param("list") List<UserExecl> list);
 }

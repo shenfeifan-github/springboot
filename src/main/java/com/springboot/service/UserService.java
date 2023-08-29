@@ -14,4 +14,5 @@ public interface UserService {
    void removeUser(Integer[] ids);
    void updateUserStatus(Integer id);
    List<Integer> getUserId();
+   JsonData insertUserList(List<UserExecl> list);
 }

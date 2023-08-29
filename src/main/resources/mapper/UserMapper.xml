@@ -5,6 +5,13 @@
         insert into User (name,number,class_number,create_time)
         values (#{vo.name},#{vo.number},#{vo.classNumber},NOW())
     </insert>
+    <insert id="insertUserList" parameterType="java.util.List">
+        insert into user (name,number,class_number,create_time)
+        values
+               <foreach collection="list" item="user"  separator=",">
+               (#{user.name}, #{user.number}, #{user.classNumber},now())
+               </foreach>
+    </insert>
     <update id="removeUser">
         update user set status =1
         <where>

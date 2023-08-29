@@ -62,4 +62,15 @@ public class UserServiceImpl implements UserService {
     public List<Integer> getUserId() {
         return userMapper.getUserId();
     }
+
+    @Override
+    public JsonData insertUserList(List<UserExecl> list) {
+        try {
+            userMapper.insertUserList(list);
+            return JsonData.success("导入成功!");
+        }catch (Exception e){
+            return JsonData.fail("导入失败!"+e);
+        }
+
+    }
 }
