@@ -37,4 +37,13 @@
     <select id="getUserNmber" resultType="com.springboot.pojo.User">
         select number,name from user where number=#{number}
     </select>
+    <select id="getUserExcel" resultType="com.springboot.pojo.EasyExcel.UserExecl">
+        select
+               u.name,
+               u.number,
+               u.class_number As classNumber,
+               u.create_time AS createTime,
+               g.class_name AS className
+             from user u left join grade g  on u.class_number =g.codeshare
+    </select>
 </mapper>

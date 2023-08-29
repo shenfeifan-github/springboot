@@ -2,6 +2,7 @@ package com.springboot.service.Impl;
 import com.springboot.mapper.GradeMapper;
 import com.springboot.mapper.UserMapper;
 import com.springboot.pojo.Dto.UserDto;
+import com.springboot.pojo.EasyExcel.UserExecl;
 import com.springboot.pojo.User;
 import com.springboot.pojo.VO.UserVo;
 import com.springboot.pojo.domain.JsonData;
@@ -45,5 +46,10 @@ public class UserServiceImpl implements UserService {
         for (Integer id:ids){
             userMapper.removeUser(id);
         }
+    }
+
+    @Override
+    public List<UserExecl> getUserEXcel() {
+        return userMapper.getUserExcel();
     }
 }

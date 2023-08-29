@@ -1,5 +1,7 @@
 package com.springboot.mapper;
+import com.alibaba.excel.EasyExcel;
 import com.springboot.pojo.Dto.UserDto;
+import com.springboot.pojo.EasyExcel.UserExecl;
 import com.springboot.pojo.User;
 import com.springboot.pojo.VO.UserVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +15,5 @@ public interface UserMapper {
     User getUserNmber(@Param("number") Integer number);
     void saveUser(@Param("vo") User vo);
     void removeUser(@Param("id") Integer id);
+    List<UserExecl> getUserExcel();
 }
