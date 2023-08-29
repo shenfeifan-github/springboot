@@ -13,6 +13,9 @@
         </if>
         </where>
     </update>
+    <update id="updateUserStatus">
+        update user set status =1 where id= #{id}
+    </update>
     <select id="getUser" resultType="com.springboot.pojo.Dto.UserDto">
         select id,
                name,
@@ -45,5 +48,8 @@
                u.create_time AS createTime,
                g.class_name AS className
              from user u left join grade g  on u.class_number =g.codeshare
+    </select>
+    <select id="getUserId" resultType="java.lang.Integer">
+        select id from user where status =0
     </select>
 </mapper>

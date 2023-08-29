@@ -16,4 +16,6 @@ public interface UserMapper {
     void saveUser(@Param("vo") User vo);
     void removeUser(@Param("id") Integer id);
     List<UserExecl> getUserExcel();
+    void updateUserStatus(@Param("id") Integer id);
+    List<Integer> getUserId();
 }

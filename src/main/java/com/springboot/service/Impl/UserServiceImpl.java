@@ -52,4 +52,14 @@ public class UserServiceImpl implements UserService {
     public List<UserExecl> getUserEXcel() {
         return userMapper.getUserExcel();
     }
+
+    @Override
+    public void updateUserStatus(Integer id) {
+        userMapper.updateUserStatus(id);
+    }
+
+    @Override
+    public List<Integer> getUserId() {
+        return userMapper.getUserId();
+    }
 }

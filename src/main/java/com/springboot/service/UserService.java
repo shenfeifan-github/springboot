@@ -12,4 +12,6 @@ public interface UserService {
    List<UserExecl> getUserEXcel();
    JsonData saveUser(User vo);
    void removeUser(Integer[] ids);
+   void updateUserStatus(Integer id);
+   List<Integer> getUserId();
 }
