@@ -9,4 +9,5 @@ import java.util.List;
 public interface GradeMapper {
     Grade getGrade(@Param("classNumber") Integer classNumber);
     List<Integer> getCodeShare();
+    void saveGrade(@Param("vo") Grade grade);
 }
