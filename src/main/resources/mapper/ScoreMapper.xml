@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.mapper.ScoreMapper">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <select id="getScore" resultType="com.springboot.pojo.Score">
+        select id,
+             name,
+            number,
+            class_name AS className,
+            class_number AS classNumber,
+            mathematics,
+            philology,
+            english,
+            chemistry,
+            physics,
+            biology,
+            mathematics+philology+english+chemistry+physics+biology AS general,
+            chemistry+physics+biology AS integerscience
+          from score
+       <where>
+           <if test="vo.name !=null and vo.name != ''">
+               name =#{vo.name}
+           </if>
+           <if test="vo.number !=null and vo.number != ''">
+              and number =#{vo.number}
+           </if>
+           <if test="vo.className !=null and vo.className != ''">
+               and  class_name =#{vo.className}
+           </if>
+           <if test="vo.classNumber !=null and vo.classNumber != ''">
+               and  class_number =#{vo.classNumber}
+           </if>
+           <if test="vo.mathematics !=null and vo.mathematics != ''">
+               and  mathematics =#{vo.mathematics}
+           </if>
+           <if test="vo.philology !=null and vo.philology != ''">
+               and philology =#{vo.philology}
+           </if>
+           <if test="vo.english !=null and vo.english != ''">
+               and english =#{vo.english}
+           </if>
+           <if test="vo.chemistry !=null and vo.chemistry != ''">
+               and  chemistry =#{vo.chemistry}
+           </if>
+           <if test="vo.physics !=null and vo.physics != ''">
+               and  physics =#{vo.physics}
+           </if>
+           <if test="vo.biology !=null and vo.biology != ''">
+               and  biology =#{vo.biology}
+           </if>
+           <if test="vo.general !=null and vo.general != ''">
+               and mathematics+philology+english+chemistry+physics+biology=#{vo.general}
+           </if>
+           <if test="vo.integerscience !=null and vo.integerscience != ''">
+               and chemistry+physics+biology=#{vo.integerscience}
+           </if>
+       </where>
+        ORDER BY general DESC
+    </select>
+    <select id="getScoreExcel" resultType="com.springboot.pojo.EasyExcel.ScoreExcel">
+        select id,
+               name,
+               number,
+               class_name AS className,
+               class_number AS classNumber,
+               mathematics,
+               philology,
+               english,
+               chemistry,
+               physics,
+               biology,
+               mathematics+philology+english+chemistry+physics+biology AS general,
+               chemistry+physics+biology AS integerscience
+        from score
+        <where>
+            <if test="classNumber !=null and classNumber !=''">
+                class_number=#{classNumber}
+            </if>
+        </where>
+    </select>
+</mapper>

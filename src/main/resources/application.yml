@@ -24,4 +24,9 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
 
+# sql日志
+logging:
+  level:
+    # 指定mybatis的mapper映射配置文件的包路径
+    com.springboot.mapper: debug
 

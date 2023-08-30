@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
    List<UserDto> getUser(UserVo vo);
-   List<UserExecl> getUserEXcel();
+   List<UserExecl> getUserExcel();
    JsonData saveUser(User vo);
    void removeUser(Integer[] ids);
    void updateUserStatus(Integer id);

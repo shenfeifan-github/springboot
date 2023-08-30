@@ -78,11 +78,11 @@ public class UserController {
     @PostMapping("/export")
     public JsonData export() throws IOException{
         try {
-            List<UserExecl> list =userService.getUserEXcel();
+            List<UserExecl> list =userService.getUserExcel();
             SimpleDateFormat dateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
             String fileName="学生列表"+dateFormat.format(new Date())+".xlsx";
             EasyExcel.write(fileName, UserExecl.class)
-                    .sheet("模板")
+                    .sheet("学生表")
                     .doWrite(() -> {
                         // 分页查询数据
                         return list;

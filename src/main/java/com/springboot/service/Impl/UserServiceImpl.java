@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserExecl> getUserEXcel() {
+    public List<UserExecl> getUserExcel() {
         return userMapper.getUserExcel();
     }
 
