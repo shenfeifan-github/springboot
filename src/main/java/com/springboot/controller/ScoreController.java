@@ -69,7 +69,7 @@ public class ScoreController {
                         // 分页查询数据
                         return list;
                     });
-            return JsonData.success("导出成功");
+            return JsonData.success(fileName,"导出成功");
         }catch (Exception e){
             return JsonData.fail("导出失败"+e);
         }
