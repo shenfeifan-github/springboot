@@ -24,9 +24,13 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
 
+aliyun:
+  AccessKeyId: LTAI5tLKVq1Wvzb8JzdiiVw7
+  AccessKeySecret: eabQg4BFuixiUzYXG3CQchTBqumo7A
+  SignName: sy990620
+
 # sql日志
 logging:
   level:
     # 指定mybatis的mapper映射配置文件的包路径
     com.springboot.mapper: debug
-
