@@ -16,7 +16,7 @@
                NOW())
     </insert>
 
-    <select id="getGrade" resultType="com.springboot.pojo.Grade">
+    <select id="getGradeByNumber" resultType="com.springboot.pojo.Grade">
         select g.id,
                g.codeshare,
                g.charge,
@@ -25,6 +25,34 @@
                g.commissary,g.monitor,
                g.create_time AS createTime
         from grade g where codeshare=#{classNumber} and status=0
+    </select>
+    <select id="getGrade" resultType="com.springboot.pojo.Grade">
+        select g.id,
+               g.codeshare,
+               g.charge,
+               g.monitor,
+               g.class_name AS className,
+               g.commissary,
+               g.create_time AS createTime
+        from grade g
+       <where>
+           <if test="vo.codeshare !=null">
+               g.codeshare=#{vo.codeshare}
+           </if>
+           <if test="vo.charge !=null">
+              and g.charge=#{vo.charge}
+           </if>
+           <if test="vo.monitor !=null">
+             and  g.monitor=#{vo.monitor}
+           </if>
+           <if test="vo.className !=null">
+             and  g.class_name=#{vo.className}
+           </if>
+           <if test="vo.commissary !=null">
+             and  g.commissary=#{vo.commissary}
+           </if>
+       </where>
+        order by g.create_time DESC
     </select>
     <select id="getCodeShare" resultType="java.lang.Integer">
         select codeshare from grade where status =0;

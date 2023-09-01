@@ -14,16 +14,15 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/score")
 public class ScoreController {
@@ -52,7 +51,7 @@ public class ScoreController {
             sheet="年级成绩表";
         }
         if (classNumber !=null){
-          Grade grade= gradeService.getGrade(classNumber);
+          Grade grade= gradeService.getGradeByNumber(classNumber);
           if (!ObjectUtils.isEmpty(grade)){
               sheet=grade.getClassName()+"成绩表";
           }else {
@@ -66,7 +65,6 @@ public class ScoreController {
             EasyExcel.write(fileName, ScoreExcel.class)
                     .sheet(sheet)
                     .doWrite(() -> {
-                        // 分页查询数据
                         return list;
                     });
             return JsonData.success(fileName,"导出成功");

@@ -15,7 +15,6 @@ import com.springboot.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -29,6 +28,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -42,7 +42,7 @@ public class UserController {
         List<UserDto> result = userService.getUser(vo);
         for (UserDto userDto:result){
              if (userDto.getClassNumber() !=null){
-             Grade grade= gradeService.getGrade(userDto.getClassNumber());
+             Grade grade= gradeService.getGradeByNumber(userDto.getClassNumber());
                  userDto.setGrade(grade);
              }
         }
