@@ -37,7 +37,7 @@ public class UserController {
     private GradeService gradeService;
     @ApiOperation(value = "获取用户")
     @PostMapping("/getUser")
-    public JsonData getUser(@RequestBody UserVo vo){
+    public JsonData getUser( @RequestBody UserVo vo){
         PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
         List<UserDto> result = userService.getUser(vo);
         for (UserDto userDto:result){
