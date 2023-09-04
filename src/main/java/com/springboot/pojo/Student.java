@@ -1,19 +1,15 @@
 package com.springboot.pojo;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class User {
+public class Student {
     private Integer id;
-    private String userName;
-    private String phone;
-    private String account;
-    private String profile;//头像
-    private Integer age;
-    private String sex;
+    private String name;
+    private Integer number;//学号
+    private Integer classNumber;//班号
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 }

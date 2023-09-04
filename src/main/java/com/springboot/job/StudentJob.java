@@ -1,6 +1,6 @@
 package com.springboot.job;
 
-import com.springboot.service.UserService;
+import com.springboot.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,14 +11,14 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
-public class UserJob {
+public class StudentJob {
     @Autowired
-    UserService userService;
+    StudentService studentService;
     @Scheduled(cron ="0 0 0 * * ?")
     //每天零点执行
     public void updeUserStatus(){
         log.info("进入定时任务——————————");
-       List<Integer> list= userService.getUserId();
+       List<Integer> list= studentService.getStudentId();
        if (!ObjectUtils.isEmpty(list)){
            Integer id =list.get(0);
            log.info("定时任务获取到id{}",list);
@@ -31,7 +31,7 @@ public class UserJob {
                e.printStackTrace();
            }
            if(id !=null){
-               userService.updateUserStatus(id);
+               studentService.updateStudentStatus(id);
                log.info("定时任务修改了id为"+id);
            }
        }

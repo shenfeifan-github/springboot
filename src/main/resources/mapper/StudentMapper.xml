@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.mapper.StudentMapper">
+    <insert id="saveStudent">
+        insert into student (name,number,class_number,create_time)
+        values (#{vo.name},#{vo.number},#{vo.classNumber},NOW())
+    </insert>
+    <insert id="insertStudentList" parameterType="java.util.List">
+        insert into student (name,number,class_number,create_time)
+        values
+               <foreach collection="list" item="student"  separator=",">
+               (#{student.name}, #{student.number}, #{student.classNumber},now())
+               </foreach>
+    </insert>
+    <update id="removeStudent">
+        update student set status =1
+        <where>
+        <if test="id != null">
+                id=#{id}
+        </if>
+        </where>
+    </update>
+    <update id="updateStudentStatus">
+        update student set status =1 where id= #{id}
+    </update>
+    <select id="getStudent" resultType="com.springboot.pojo.Dto.StudentDto">
+        select id,
+               name,
+               number,
+               class_number As classNumber,
+               create_time AS createTime
+        from student
+     <where>
+         <if test="vo.name !=null">
+            name=#{vo.name}
+         </if>
+         <if test="vo.number !=null">
+            and number=#{vo.number}
+         </if>
+         <if test="vo.classNumber !=null">
+            and class_number=#{vo.classNumber}
+         </if>
+          and status=0
+     </where>
+        order by create_time DESC
+    </select>
+    <select id="getStudentNmber" resultType="com.springboot.pojo.Student">
+        select number,name from student where number=#{number}
+    </select>
+    <select id="getStudentExcel" resultType="com.springboot.pojo.EasyExcel.StudentExecl">
+        select
+               s.name,
+               s.number,
+               s.class_number As classNumber,
+               s.create_time AS createTime,
+               g.class_name AS className
+             from student s left join grade g  on u.class_number =g.codeshare
+    </select>
+    <select id="getStudentId" resultType="java.lang.Integer">
+        select id from student where status =0
+    </select>
+</mapper>
