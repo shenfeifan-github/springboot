@@ -48,6 +48,18 @@ public class GradeController {
             return JsonData.success(pageInfo,"查询成功!");
 
         }catch (Exception e){
+            return JsonData.success("查询失败!"+e);
+        }
+
+    }
+    @GetMapping ("/getGradeName")
+    public JsonData getGradeName(){
+        try {
+
+            List<Grade> result=  gradeService.getGradeName();
+            return JsonData.success(result,"查询成功!");
+
+        }catch (Exception e){
             return JsonData.success("发送失败!"+e);
         }
 

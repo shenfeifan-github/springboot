@@ -57,4 +57,12 @@
     <select id="getCodeShare" resultType="java.lang.Integer">
         select codeshare from grade where status =0;
     </select>
+    <select id="getGradeName" resultType="com.springboot.pojo.Grade">
+        select
+               g.codeshare,
+               g.class_name AS className,
+               g.create_time AS createTime
+        from grade g
+        order by g.create_time DESC
+    </select>
 </mapper>

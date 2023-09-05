@@ -12,4 +12,5 @@ public interface GradeMapper {
     List<Grade> getGrade(@Param("vo") GradeVo gradeVo);
     List<Integer> getCodeShare();
     void saveGrade(@Param("vo") Grade grade);
+    List<Grade> getGradeName();
 }

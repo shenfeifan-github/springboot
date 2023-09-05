@@ -33,4 +33,9 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> getGrade(GradeVo gradeVo) {
         return gradeMapper.getGrade(gradeVo);
     }
+
+    @Override
+    public List<Grade> getGradeName() {
+        return gradeMapper.getGradeName();
+    }
 }

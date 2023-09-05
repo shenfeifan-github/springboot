@@ -9,4 +9,5 @@ public interface GradeService {
     Grade getGradeByNumber(Integer classNumber);
     List<Grade> getGrade(GradeVo gradeVo);
     JsonData saveGrade(Grade grade);
+    List<Grade> getGradeName();
 }

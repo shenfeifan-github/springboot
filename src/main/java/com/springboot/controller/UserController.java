@@ -8,6 +8,7 @@ import com.springboot.pojo.VO.UserVo;
 import com.springboot.pojo.domain.JsonData;
 import com.springboot.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -23,6 +24,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @ApiOperation("获取用户列表")
     @PostMapping("/getUser")
     public JsonData getUser(UserVo vo){
         try {
@@ -34,6 +36,7 @@ public class UserController {
             return JsonData.fail("查询失败"+e);
         }
     }
+    @ApiOperation("用户登录")
     @PostMapping("/getLogin")
     public JsonData userLogin(@RequestBody LoginVo vo){
         try {
