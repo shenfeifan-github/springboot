@@ -7,16 +7,19 @@
         phone,
         account,
         profile,
+       CASE sex
+       WHEN 0 THEN '男'
+       WHEN 1 THEN '女'
+       ELSE '其他' END AS sex,
         age,
-        sex,
         create_time as createTime
         from user
        <where>
-           <if test="vo.userName!=null">
-               user_name=#{userName}
+           <if test="vo.paramOne!=null and vo.paramOne !=''">
+               user_name like concat('%',#{vo.paramOne},'%')
            </if>
-           <if test="vo.phone!=null">
-              and phone=#{phone}
+           <if test="vo.paramTwo!=null and vo.paramTwo !=''">
+              and phone like concat('%',#{vo.paramTwo},'%')
            </if>
        </where>
         order by create_time desc

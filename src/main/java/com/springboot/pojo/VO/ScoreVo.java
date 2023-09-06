@@ -6,6 +6,8 @@ import lombok.Data;
 public class ScoreVo {
     private Integer pageNum=1;
     private Integer pageSize=10;
+    private String paramOne;
+    private String paramTwo;
     private String  name;//学生名称
     private Integer number;//学号
     private String  className;//班级名称

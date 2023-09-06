@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
     @ApiOperation("获取用户列表")
     @PostMapping("/getUser")
-    public JsonData getUser(UserVo vo){
+    public JsonData getUser(@RequestBody UserVo vo){
         try {
           List<User> result  =userService.getUser(vo);
             PageHelper.startPage(vo.getPageNum(),vo.getPageSize());

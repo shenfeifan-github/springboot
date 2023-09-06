@@ -28,7 +28,9 @@ aliyun:
   AccessKeyId: LTAI5tLKVq1Wvzb8JzdiiVw7
   AccessKeySecret: eabQg4BFuixiUzYXG3CQchTBqumo7A
   SignName: sy990620
-
+  oss:
+   endpoint: https://oss-cn-guangzhou.aliyuncs.com
+   bucketName: shenfeifan
 # sql日志
 logging:
   level:

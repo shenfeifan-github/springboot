@@ -40,6 +40,13 @@
          <if test="vo.classNumber !=null">
             and class_number=#{vo.classNumber}
          </if>
+         <if test="vo.paramOne !=null and vo.paramOne !=''">
+             and name  like concat('%',#{vo.paramOne},'%')
+         </if>
+         <if test="vo.paramTwo !=null and vo.paramTwo !=''">
+             and (class_number like concat('%',#{vo.paramTwo},'%')
+             or number like concat('%',#{vo.paramTwo},'%'))
+         </if>
           and status=0
      </where>
         order by create_time DESC

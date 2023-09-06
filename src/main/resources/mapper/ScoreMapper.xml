@@ -54,6 +54,9 @@
            <if test="vo.integerscience !=null and vo.integerscience != ''">
                and chemistry+physics+biology=#{vo.integerscience}
            </if>
+           <if test="vo.paramOne !=null and vo.paramOne != ''">
+               and  name like concat('%',#{vo.paramOne},'%')
+           </if>
        </where>
         ORDER BY general DESC
     </select>

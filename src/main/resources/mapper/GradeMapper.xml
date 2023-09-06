@@ -36,20 +36,13 @@
                g.create_time AS createTime
         from grade g
        <where>
-           <if test="vo.codeshare !=null">
-               g.codeshare=#{vo.codeshare}
+           <if test="vo.paramOne !=null and vo.paramOne !='' ">
+               (g.codeshare like concat('%',#{vo.paramOne},'%') or g.class_name like concat('%',#{vo.paramOne},'%'))
            </if>
-           <if test="vo.charge !=null">
-              and g.charge=#{vo.charge}
-           </if>
-           <if test="vo.monitor !=null">
-             and  g.monitor=#{vo.monitor}
-           </if>
-           <if test="vo.className !=null">
-             and  g.class_name=#{vo.className}
-           </if>
-           <if test="vo.commissary !=null">
-             and  g.commissary=#{vo.commissary}
+           <if test="vo.paramTwo !=null and vo.paramTwo !=''">
+              and (g.charge like concat('%',#{vo.paramTwo},'%')
+                  or  g.monitor like  concat('%',#{vo.paramTwo},'%')
+                  or  g.commissary like  concat('%',#{vo.paramTwo},'%'))
            </if>
        </where>
         order by g.create_time DESC
