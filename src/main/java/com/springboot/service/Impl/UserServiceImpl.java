@@ -28,4 +28,11 @@ public class UserServiceImpl  implements UserService {
     public void saveUser(User vo) {
         userMapper.saveUser(vo);
     }
+
+    @Override
+    public void removeUser(Integer[] ids) {
+        for (Integer id:ids){
+            userMapper.removeUser(id);
+        }
+    }
 }

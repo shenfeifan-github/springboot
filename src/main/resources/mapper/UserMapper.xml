@@ -6,6 +6,14 @@
         values
                (#{vo.userName},#{vo.phone},#{vo.account},#{vo.profile},#{vo.age},#{vo.sex},NOW())
     </insert>
+    <update id="removeUser">
+        update user set status =1
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+        </where>
+    </update>
     <select id="getUser" resultType="com.springboot.pojo.User">
        select id,
         user_name as userName,
@@ -20,8 +28,9 @@
         create_time as createTime
         from user
        <where>
+           status=0
            <if test="vo.paramOne!=null and vo.paramOne !=''">
-               user_name like concat('%',#{vo.paramOne},'%')
+              and user_name like concat('%',#{vo.paramOne},'%')
            </if>
            <if test="vo.paramTwo!=null and vo.paramTwo !=''">
               and phone like concat('%',#{vo.paramTwo},'%')
@@ -43,7 +52,7 @@
 
                create_time as createTime
               from user
-            where account=#{vo.account} and phone=#{vo.phone}
+            where account=#{vo.account} and phone=#{vo.phone} and status=0
 
     </select>
 

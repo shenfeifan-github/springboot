@@ -61,4 +61,14 @@ public class UserController {
             return JsonData.fail("新增失败!"+e);
         }
     }
+    @ApiOperation(value = "批量删除用户")
+    @PostMapping("/removeUser")
+    public JsonData removeUser(Integer[] ids){
+        try {
+           userService.removeUser(ids);
+            return JsonData.success(null,"删除成功!");
+        }catch (Exception e){
+            return JsonData.fail("删除失败!"+e);
+        }
+    }
 }
