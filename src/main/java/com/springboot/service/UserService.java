@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserService {
     List<User> getUser(UserVo vo);
     User userLogin(LoginVo vo);
+    void saveUser(User vo);
 }

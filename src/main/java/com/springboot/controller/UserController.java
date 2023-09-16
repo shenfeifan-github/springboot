@@ -28,8 +28,9 @@ public class UserController {
     @PostMapping("/getUser")
     public JsonData getUser(@RequestBody UserVo vo){
         try {
-          List<User> result  =userService.getUser(vo);
             PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+          List<User> result  =userService.getUser(vo);
+
             PageInfo<User> pageInfo = new PageInfo<>(result);
             return JsonData.success(pageInfo,"查询成功!");
         }catch (Exception e){
@@ -48,6 +49,16 @@ public class UserController {
             }
         }catch (Exception e){
             return JsonData.fail("登录失败!"+e);
+        }
+    }
+    @ApiOperation("新增用户")
+    @PostMapping("/saveUser")
+    public JsonData saveUser(@RequestBody User vo){
+        try {
+          userService.saveUser(vo);
+            return JsonData.success("新增成功");
+        }catch (Exception e){
+            return JsonData.fail("新增失败!"+e);
         }
     }
 }

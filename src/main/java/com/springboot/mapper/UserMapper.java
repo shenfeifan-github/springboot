@@ -12,4 +12,5 @@ import java.util.List;
 public interface UserMapper {
    List<User> getUser(@Param("vo")UserVo vo);
     User userLogin(@Param("vo")LoginVo vo);
+    void saveUser(@Param("vo") User vo);
 }
