@@ -54,12 +54,12 @@ public class UserController {
     @ApiOperation("新增用户")
     @PostMapping("/saveUser")
     public JsonData saveUser(@RequestBody User vo){
-        try {
-          userService.saveUser(vo);
-            return JsonData.success("新增成功");
-        }catch (Exception e){
-            return JsonData.fail("新增失败!"+e);
-        }
+        return  userService.saveUser(vo);
+    }
+    @ApiOperation("修改用户")
+    @PostMapping("/updateUser")
+    public JsonData updateUser(@RequestBody User vo){
+        return  userService.updateUser(vo);
     }
     @ApiOperation(value = "批量删除用户")
     @PostMapping("/removeUser")

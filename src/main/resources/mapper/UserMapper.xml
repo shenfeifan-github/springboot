@@ -14,6 +14,15 @@
             </if>
         </where>
     </update>
+    <update id="updateUser">
+        update user set
+             user_name=#{vo.userName},
+             phone=#{vo.phone},
+            account=#{vo.account},
+            age=#{vo.age},
+            sex=#{vo.sex}
+        where id=#{vo.id}
+    </update>
     <select id="getUser" resultType="com.springboot.pojo.User">
        select id,
         user_name as userName,
@@ -54,6 +63,9 @@
               from user
             where account=#{vo.account} and phone=#{vo.phone} and status=0
 
+    </select>
+    <select id="getPhone" resultType="java.lang.String">
+        select phone from user where status=0
     </select>
 
 </mapper>
