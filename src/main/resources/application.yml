@@ -12,10 +12,10 @@ spring:
         # none(无应答模式) auto(自动应答模式) manual（手动应答模式）
         acknowledge-mode: auto
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/sff
-    username: root
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://rm-cn-g4t3iq168000keoo.rwlb.rds.aliyuncs.com:3306/sff?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      username: root
+      password: Sy990620
+      driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   # 配置mapper.xml文件路径
   mapper-locations: classpath:/mapper/**/*.xml
@@ -31,6 +31,11 @@ aliyun:
   oss:
    endpoint: https://oss-cn-guangzhou.aliyuncs.com
    bucketName: shenfeifan
+obs:
+  AccessKeyId: MA4PWDW0URWTMOWNHH8K
+  AccessKeySecret: 1aO3Uawh3CKrrPTTEh7MhWN4dByBQZ7THdYCpV3Y
+  endpoint: https://obs.cn-south-1.myhuaweicloud.com
+  bucketName: jxxgmm
 # sql日志
 logging:
   level:
