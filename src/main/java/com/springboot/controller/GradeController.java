@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +26,9 @@ public class GradeController {
 
     @Autowired
     private GradeService gradeService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @ApiOperation(value = "添加班级信息")
     @PostMapping("/saveGrade")
@@ -41,6 +46,8 @@ public class GradeController {
     @PostMapping("/getGrade")
     public JsonData getGrade(@RequestBody GradeVo vo){
         try {
+
+
             PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
           List<Grade> result=  gradeService.getGrade(vo);
 
@@ -64,5 +71,28 @@ public class GradeController {
         }
 
     }
+    @GetMapping ("/setRedis")
+    public JsonData setRedis(String key,String value){
+        try {
+            ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+            valueOperations.set(key,value);
+            return JsonData.success();
+        }catch (Exception e){
+            return JsonData.success("插入失败!"+e);
+        }
 
+
+    }
+    @GetMapping ("/getRedis")
+    public JsonData getRedis(String key){
+        try {
+            ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+            Object value=valueOperations.get(key);
+            return JsonData.success(value);
+        }catch (Exception e){
+            return JsonData.success("获取失败!"+e);
+        }
+
+
+    }
 }
